@@ -1,0 +1,72 @@
+/* Srovnání e-shopových platforem – minimální styly.
+   Vše je omezené na .pv-kalk; písmo a barvy textu se dědí ze stránky.
+   Barvy grafu lze přepsat proměnnými --pvk-*. */
+.pv-kalk {
+  --pvk-line: color-mix(in srgb, currentColor 18%, transparent);
+  --pvk-fill: color-mix(in srgb, currentColor 7%, transparent);
+  --pvk-lic: #2f5d8a;
+  --pvk-mkt: #d9581a;
+  --pvk-host: #6b7c8c;
+  --pvk-app: #a8b4bf;
+  --pvk-mnt: #8a63b5;
+  --pvk-good: #1f7a4d;
+  --pvk-warn: #a36a00;
+  --pvk-bad: #b23a2e;
+}
+.pv-kalk [hidden] { display: none !important; }
+
+/* ovládání */
+.pv-kalk .pvk-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25em 2em; }
+.pv-kalk .pvk-ctl { display: flex; flex-direction: column; gap: .4em; min-width: 0; margin: 0; padding: 0; border: 0; }
+.pv-kalk .pvk-ctl output { font-weight: 700; font-size: 1.25em; }
+.pv-kalk .pvk-ctl input[type=range] { width: 100%; }
+.pv-kalk .pvk-seg { display: flex; flex-wrap: wrap; gap: .4em; }
+.pv-kalk .pvk-seg button[aria-pressed="true"] { font-weight: 700; outline: 2px solid currentColor; outline-offset: 1px; }
+.pv-kalk .pvk-adv { grid-column: 1 / -1; }
+.pv-kalk .pvk-advgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75em 1.5em; margin-top: .75em; }
+.pv-kalk .pvk-advgrid label { display: flex; flex-direction: column; gap: .25em; }
+
+/* graf */
+.pv-kalk .pvk-legend { display: flex; flex-wrap: wrap; gap: .5em 1.25em; font-size: .875em; }
+.pv-kalk .pvk-sw { display: inline-block; width: .8em; height: .8em; margin-right: .35em; vertical-align: -.05em; }
+.pv-kalk .pvk-bars { display: flex; flex-direction: column; gap: .5em; margin: 1em 0; }
+.pv-kalk .pvk-bar { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr) auto; gap: .75em; align-items: center; }
+.pv-kalk .pvk-track { display: flex; height: 1.25em; background: var(--pvk-fill); overflow: hidden; }
+.pv-kalk .pvk-track i { display: block; height: 100%; }
+.pv-kalk .pvk-bar-val { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pv-kalk .pvk-s-lic { background: var(--pvk-lic); }
+.pv-kalk .pvk-s-mkt { background: var(--pvk-mkt); }
+.pv-kalk .pvk-s-host { background: var(--pvk-host); }
+.pv-kalk .pvk-s-app { background: var(--pvk-app); }
+.pv-kalk .pvk-s-mnt { background: var(--pvk-mnt); }
+@media (max-width: 640px) {
+  .pv-kalk .pvk-bar { grid-template-columns: minmax(0, 1fr) auto; }
+  .pv-kalk .pvk-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* tabulky */
+.pv-kalk .pvk-scroll { overflow-x: auto; max-width: 100%; }
+.pv-kalk table { border-collapse: collapse; width: 100%; }
+.pv-kalk th, .pv-kalk td { padding: .5em .6em; border-bottom: 1px solid var(--pvk-line); text-align: left; vertical-align: top; }
+.pv-kalk .pvk-r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pv-kalk .pvk-tot { font-weight: 700; }
+.pv-kalk .pvk-off { opacity: .5; }
+.pv-kalk .pvk-hl { background: var(--pvk-fill); }
+.pv-kalk .pvk-name { min-width: 12em; }
+.pv-kalk .pvk-note { display: block; font-size: .85em; opacity: .75; white-space: normal; }
+.pv-kalk .pvk-feat td { min-width: 9em; }
+
+/* štítky */
+.pv-kalk .pvk-est, .pv-kalk .pvk-tag, .pv-kalk .pvk-pill {
+  display: inline-block; font-size: .75em; line-height: 1.4; padding: 0 .4em;
+  border: 1px solid currentColor; border-radius: .25em; white-space: nowrap; font-weight: 400;
+}
+.pv-kalk .pvk-est { color: var(--pvk-warn); }
+.pv-kalk .pvk-l3 { color: var(--pvk-good); }
+.pv-kalk .pvk-l2 { color: var(--pvk-warn); }
+.pv-kalk .pvk-l1 { color: var(--pvk-bad); }
+
+/* karty expanze */
+.pv-kalk .pvk-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1em; }
+.pv-kalk .pvk-card { min-width: 0; padding: 1em; border: 1px solid var(--pvk-line); }
+.pv-kalk .pvk-card h3 { margin-top: 0; }
