@@ -27,6 +27,14 @@ Barvy grafu a štítků lze přepsat v CSS šablony, např.:
 
 == Changelog ==
 
+= 1.2.0 =
+* Filtr zobrazení: rychlý přechod jen na náklady, trhy, platební brány nebo funkční srovnání.
+* Filtr platforem nad výsledky, platí pro náklady, trhy, expanzi, platební brány i funkční srovnání.
+* Přepínače trhů a platební brány jako radio buttony.
+* Rozpis nákladů ukazuje prvních 5 platforem, zbytek po kliknutí na „Zobrazit vše“.
+* Tabulky širší než stránka mají zesvětlený okraj na straně, kam se dají posunout.
+* Odstraněna sekce „Co z toho plyne“, platformy v úvodu abecedně, vyrovnanější hodnocení.
+
 = 1.1.0 =
 * Napojení na Yoast SEO a Rank Math, záložní meta description a JSON-LD bez SEO pluginu.
 

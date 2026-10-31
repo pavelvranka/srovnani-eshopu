@@ -17,7 +17,7 @@ import zipfile
 # Jediné místo pro verzi a datum ověření cen. Build je dosadí všude, kde je
 # v souborech zástupný text {{VERSION}}, {{UPDATED}} nebo {{UPDATED_CZ}}.
 # ---------------------------------------------------------------------------
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 UPDATED = "2026-10-31"          # ISO datum posledního ověření cen
 
 PLUGIN_SLUG = "srovnani-platforem"

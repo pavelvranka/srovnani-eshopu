@@ -20,9 +20,18 @@
 .pv-kalk .pvk-ctl { display: flex; flex-direction: column; gap: .4em; min-width: 0; margin: 0; padding: 0; border: 0; }
 .pv-kalk .pvk-ctl output { font-weight: 700; font-size: 1.25em; }
 .pv-kalk .pvk-ctl input[type=range] { width: 100%; }
-.pv-kalk .pvk-seg { display: flex; flex-wrap: wrap; gap: .4em; }
-.pv-kalk .pvk-seg button[aria-pressed="true"] { font-weight: 700; outline: 2px solid currentColor; outline-offset: 1px; }
+.pv-kalk fieldset.pvk-ctl legend { padding: 0; margin-bottom: .4em; }
+.pv-kalk fieldset.pvk-ctl label { display: flex; gap: .5em; align-items: baseline; cursor: pointer; }
+.pv-kalk fieldset.pvk-ctl input[type=radio], .pv-kalk fieldset.pvk-ctl input[type=checkbox] { flex: none; margin: 0; }
+.pv-kalk fieldset.pvk-ctl label:has(input[type=radio]:checked) { font-weight: 700; }
 .pv-kalk .pvk-adv { grid-column: 1 / -1; }
+.pv-kalk .pvk-filter { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5em 1.25em; margin: 2em 0 0; padding: 0; border: 0; }
+.pv-kalk .pvk-filter legend { padding: 0; margin-bottom: .5em; font-weight: 700; }
+.pv-kalk .pvk-filter label { display: inline-flex; gap: .4em; align-items: baseline; cursor: pointer; white-space: nowrap; }
+.pv-kalk .pvk-filter input { margin: 0; }
+.pv-kalk .pvk-filter + .pvk-filter { margin-top: 1em; }
+.pv-kalk .pvk-view-off { display: none !important; }
+.pv-kalk fieldset.pvk-ctl.pvk-row { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: .5em 1.25em; }
 .pv-kalk .pvk-advgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75em 1.5em; margin-top: .75em; }
 .pv-kalk .pvk-advgrid label { display: flex; flex-direction: column; gap: .25em; }
 
@@ -45,7 +54,21 @@
 }
 
 /* tabulky */
-.pv-kalk .pvk-scroll { overflow-x: auto; max-width: 100%; }
+.pv-kalk .pvk-scroll { overflow-x: auto; max-width: 100%; --pvk-fade: 4em; }
+/* zesvětlený okraj = tabulka pokračuje, dá se posunout do strany */
+.pv-kalk .pvk-scroll.pvk-more-r {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--pvk-fade)), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - var(--pvk-fade)), transparent);
+}
+.pv-kalk .pvk-scroll.pvk-more-l {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade));
+          mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade));
+}
+.pv-kalk .pvk-scroll.pvk-more-l.pvk-more-r {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade), #000 calc(100% - var(--pvk-fade)), transparent);
+          mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade), #000 calc(100% - var(--pvk-fade)), transparent);
+}
+.pv-kalk .pvk-more { cursor: pointer; }
 .pv-kalk table { border-collapse: collapse; width: 100%; }
 .pv-kalk th, .pv-kalk td { padding: .5em .6em; border-bottom: 1px solid var(--pvk-line); text-align: left; vertical-align: top; }
 .pv-kalk .pvk-r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }

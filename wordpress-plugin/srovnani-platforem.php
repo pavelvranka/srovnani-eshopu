@@ -145,7 +145,7 @@ function pvsp_seo_plugin() {
  * @return string
  */
 function pvsp_default_description() {
-	return 'Kalkulačka nákladů a funkční srovnání e-shopových platforem pro CZ, SK a EU: Shopify, Shoptet, Upgates, Shopware, Magento, PrestaShop, Eshop-rychle, SimpleShop, Webnode a Wix.';
+	return 'Kalkulačka nákladů a funkční srovnání e-shopových platforem pro CZ, SK a EU: Magento, PrestaShop, Shopify, Shoptet, Shopware, Upgates a startovací řešení Eshop-rychle, SimpleShop, Webnode a Wix.';
 }
 
 /**

@@ -1,6 +1,7 @@
 <div class="pv-kalk" id="pvk-root">
 <p class="pvk-meta">Autor: <a href="https://pavelvranka.cz">Pavel Vranka</a> · Ceny naposledy ověřeny: <time datetime="{{UPDATED}}">{{UPDATED_CZ}}</time> · Všechny ceny bez DPH</p>
-<p>Srovnání nákladů a funkcí e-shopových platforem pro obchodníky v Česku, na Slovensku a v EU: Shopify (Basic až Plus), Shoptet (Basic až Premium), Upgates, Shopware 6, Magento (Open Source a Adobe Commerce), PrestaShop a pro srovnání startovací řešení Eshop-rychle, SimpleShop, Webnode a Wix. Kalkulačka počítá náklady pro jeden trh i pro expanzi na další trhy, platební brány zvlášť. Ceny, které výrobce nezveřejňuje nebo které se nedají ověřit, jsou označené jako <span class="pvk-est">odhad</span>, minimální ceny jako <span class="pvk-est pvk-min">od</span>.</p>
+<p>Nezávislé srovnání nákladů a funkcí e-shopových platforem pro obchodníky v Česku, na Slovensku a v EU. Kalkulačka počítá náklady pro jeden trh i pro expanzi na další trhy, platební brány zvlášť. Všechny platformy počítá stejnou metodikou a řadí je jen podle ceny. Ceny, které výrobce nezveřejňuje nebo které se nedají ověřit, jsou označené jako <span class="pvk-est">odhad</span>, minimální ceny jako <span class="pvk-est pvk-min">od</span>.</p>
+<p>Srovnávané platformy (abecedně): Magento (Open Source a Adobe Commerce), PrestaShop, Shopify (Basic až Plus), Shoptet (Basic až Premium), Shopware 6 a Upgates. Pro srovnání i startovací řešení Eshop-rychle, SimpleShop, Webnode a Wix.</p>
 
 <section aria-labelledby="pvk-h-ctl">
   <h2 id="pvk-h-ctl">Kalkulačka nákladů</h2>
@@ -8,39 +9,34 @@
   <div class="pvk-panel">
     <div class="pvk-ctl">
       <label for="pvk-gmvIdx">Roční obrat (GMV)</label>
-      <output id="pvk-gmvVal" for="pvk-gmvIdx">5 mil. Kč</output>
-      <input id="pvk-gmvIdx" type="range" min="0" max="12" step="1" value="6">
+      <output id="pvk-gmvVal" for="pvk-gmvIdx">500 tis. Kč</output>
+      <input id="pvk-gmvIdx" type="range" min="0" max="12" step="1" value="3">
       <small>13 kategorií od 50 tis. do 500 mil. Kč ročně</small>
     </div>
     <div class="pvk-ctl">
       <label for="pvk-markets">Počet trhů (zemí)</label>
-      <output id="pvk-marketsVal" for="pvk-markets">3 trhy</output>
-      <input id="pvk-markets" type="range" min="1" max="10" value="3">
+      <output id="pvk-marketsVal" for="pvk-markets">2 trhy</output>
+      <input id="pvk-markets" type="range" min="1" max="10" value="2">
       <small>1 = jen CZ; 2 = CZ + SK; 3+ = další země EU</small>
     </div>
-    <div class="pvk-ctl">
-      <span class="pvk-lbl" id="pvk-lbl-mode">Jak řešit zahraniční trhy</span>
-      <div class="pvk-seg" id="pvk-modeSeg" role="group" aria-labelledby="pvk-lbl-mode">
-        <button type="button" data-v="domain" aria-pressed="true">Vlastní doména na zemi</button>
-        <button type="button" data-v="lang" aria-pressed="false">Jazykové verze na 1 doméně</button>
-      </div>
-      <small>Vlastní doména (.sk, .pl, .hu…) je v CEE běžná kvůli SEO, srovnávačům a důvěře.</small>
-    </div>
-    <div class="pvk-ctl">
-      <span class="pvk-lbl" id="pvk-lbl-gw">Platební brána</span>
-      <div class="pvk-seg" id="pvk-gwSeg" role="group" aria-labelledby="pvk-lbl-gw">
-        <button type="button" data-v="native" aria-pressed="true">Nativní platformy</button>
-        <button type="button" data-v="ext" aria-pressed="false">Externí (Comgate, GoPay…)</button>
-      </div>
-      <small>Nativní = Shopify Payments, Shoptet Pay. Kde nativní brána není, počítá se externí.</small>
-    </div>
     <fieldset class="pvk-ctl">
+      <legend>Jak řešit zahraniční trhy</legend>
+      <label><input type="radio" name="pvk-mode" value="domain" checked> Vlastní doména na zemi</label>
+      <label><input type="radio" name="pvk-mode" value="lang"> Jazykové verze na 1 doméně</label>
+      <small>Vlastní doména (.sk, .pl, .hu…) je v CEE běžná kvůli SEO, srovnávačům a důvěře.</small>
+    </fieldset>
+    <fieldset class="pvk-ctl">
+      <legend>Platební brána</legend>
+      <label><input type="radio" name="pvk-gw" value="native" checked> Nativní brána platformy</label>
+      <label><input type="radio" name="pvk-gw" value="ext"> Externí (Comgate, GoPay…)</label>
+      <small>Nativní = Shoptet Pay, Shopify Payments. Kde nativní brána není, počítá se externí.</small>
+    </fieldset>
+    <fieldset class="pvk-ctl pvk-row">
       <legend>Volby</legend>
       <label><input type="checkbox" id="pvk-apiOnly"> Jen platformy s API pro napojení ERP a dalších systémů</label>
       <label><input type="checkbox" id="pvk-b2b"> Potřebuji plnohodnotné B2B</label>
       <label><input type="checkbox" id="pvk-incApps"> Započítat placené aplikace a doplňky (odhad)</label>
-      <label><input type="checkbox" id="pvk-incMaint"> Započítat nutnou technickou údržbu self-hosted platforem (odhad)</label>
-      <label><input type="checkbox" id="pvk-eurPayout" checked> Výplaty v měně trhu (EUR účet), bez konverzního poplatku Shopify</label>
+      <label><input type="checkbox" id="pvk-incMaint" checked> Započítat nutnou technickou údržbu self-hosted platforem (odhad)</label>
     </fieldset>
     <details class="pvk-adv">
       <summary>Předpoklady výpočtu (kurzy, sazby, odhady)</summary>
@@ -54,7 +50,6 @@
         <label>Externí brána – karty z EHP (%) <input id="pvk-extRate" type="number" step="0.05" value="1.0"></label>
         <label>Externí brána – karty mimo EHP (%) <input id="pvk-extIntl" type="number" step="0.05" value="2.5"></label>
         <label>Externí brána – fixně za transakci (Kč) <input id="pvk-extFix" type="number" step="0.5" value="0"></label>
-        <label>Podíl obratu v cizí měně (%, prázdné = automaticky) <input id="pvk-foreign" type="number" step="5" placeholder="auto"></label>
         <label>Shoptet Premium – měsíčně (Kč, odhad) <input id="pvk-premBase" type="number" step="1000" value="12000"></label>
         <label>Shoptet Premium – další doména/trh měsíčně (Kč, odhad) <input id="pvk-premExtra" type="number" step="500" value="6000"></label>
         <label>Shopify Plus – variabilní poplatek (% GMV, odhad) <input id="pvk-plusPct" type="number" step="0.05" value="0.25"></label>
@@ -65,7 +60,31 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-sum">
+<fieldset class="pvk-filter" id="pvk-views" hidden>
+  <legend>Zobrazit</legend>
+  <label><input type="checkbox" class="pvk-view" value="sum" checked> Roční náklady</label>
+  <label><input type="checkbox" class="pvk-view" value="mx" checked> Další trhy</label>
+  <label><input type="checkbox" class="pvk-view" value="pay" checked> Platební brány</label>
+  <label><input type="checkbox" class="pvk-view" value="feat" checked> Funkční srovnání</label>
+  <button type="button" id="pvk-viewAll" class="pvk-more">Zobrazit vše</button>
+</fieldset>
+
+<fieldset class="pvk-filter" id="pvk-filter" hidden>
+  <legend>Platformy ve srovnání</legend>
+  <label><input type="checkbox" class="pvk-plat" value="magento" checked> Magento / Adobe Commerce</label>
+  <label><input type="checkbox" class="pvk-plat" value="presta" checked> PrestaShop</label>
+  <label><input type="checkbox" class="pvk-plat" value="shopify" checked> Shopify</label>
+  <label><input type="checkbox" class="pvk-plat" value="shoptet" checked> Shoptet</label>
+  <label><input type="checkbox" class="pvk-plat" value="shopware" checked> Shopware 6</label>
+  <label><input type="checkbox" class="pvk-plat" value="upgates" checked> Upgates</label>
+  <label><input type="checkbox" class="pvk-plat" value="erychle" checked> Eshop-rychle</label>
+  <label><input type="checkbox" class="pvk-plat" value="simpleshop" checked> SimpleShop</label>
+  <label><input type="checkbox" class="pvk-plat" value="webnode" checked> Webnode</label>
+  <label><input type="checkbox" class="pvk-plat" value="wix" checked> Wix</label>
+  <button type="button" id="pvk-platAll" class="pvk-more">Vybrat vše</button>
+</fieldset>
+
+<section aria-labelledby="pvk-h-sum" data-view="sum">
   <h2 id="pvk-h-sum">Roční náklady na platformu</h2>
   <p id="pvk-sumLede" aria-live="polite"></p>
   <p id="pvk-apiNote" hidden><small>Zobrazeny jen platformy s plnohodnotným API (produkty, sklady, objednávky, zákazníci) pro obousměrné napojení ERP a dalších systémů. Vyřazeny: Shoptet Basic až Enterprise (napojení jen přes doplňky, privátní API má až Premium), Eshop-rychle (API jen pro čtení objednávek), SimpleShop a Webnode.</small></p>
@@ -93,11 +112,12 @@
       <tbody id="pvk-costBody"></tbody>
     </table>
   </div>
+  <p><button type="button" id="pvk-costMore" class="pvk-more" aria-controls="pvk-costBody" aria-expanded="false" hidden>Zobrazit vše</button></p>
   <p><small>Celkem = licence nebo předplatné + příplatky za trhy + hosting. U SaaS platforem (Shopify, Shoptet, Upgates) je hosting, bezpečnost i upgrady v ceně předplatného. Práce lidí a agentury na rozvoji obchodu se nepočítá u žádné platformy. Placené aplikace a nutnou technickou údržbu self-hosted platforem (bezpečnostní patche, upgrady verzí) lze do součtu zapnout ve volbách. Hodnoty se štítkem <span class="pvk-est">odhad</span> nevycházejí z veřejného ceníku, <span class="pvk-est pvk-min">od</span> znamená minimální cenu, skutečná bývá vyšší.</small></p>
   <p><small>Platební brána = poplatky za karetní platby u všech platforem stejnou metodikou: stejný podíl obratu přes bránu, stejná průměrná objednávka a stejný podíl karet mimo EHP. Nativní brány (Shopify Payments, Shoptet Pay) podle veřejného ceníku. Ostatní platformy, nebo při volbě externí brány, poplatek externí brány typu Comgate nebo GoPay (sazba v předpokladech, proto označená jako odhad) plus příplatek, který si za externí bránu účtuje platforma (Shopify 2 / 1 / 0,6 / 0,2 %, Shoptet doplněk 200 Kč/měs.). Nezahrnuje převody, dobírku, Klarnu, chargebacky ani měsíční paušály bran.</small></p>
 </section>
 
-<section aria-labelledby="pvk-h-mx">
+<section aria-labelledby="pvk-h-mx" data-view="mx">
   <h2 id="pvk-h-mx">Kolik stojí každý další trh</h2>
   <p>Roční licence a dodatečné náklady za trhy (bez hostingu a plateb) při zvoleném obratu, režimu domén a bráně. Pod částkou je přírůstek oproti jednomu trhu.</p>
   <div class="pvk-scroll">
@@ -108,33 +128,33 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-exp">
+<section aria-labelledby="pvk-h-exp" data-view="mx">
   <h2 id="pvk-h-exp">Jak platformy řeší expanzi do zahraničí</h2>
   <div class="pvk-cards">
-    <div class="pvk-card"><h3>Shopify Grow a Advanced</h3><span class="pvk-pill pvk-l3">Markets bez příplatku za trh</span><p>Shopify Markets: jeden obchod, trhy s vlastní doménou nebo podadresářem, měnou, jazykem a cenami. Aktivace trhu nic nestojí. Nižší tarify mají omezený počet marketů, ale jeden market může pokrýt více zemí (i s prodejem v lokální měně) a dají se použít submarkety. Multi-currency jen se Shopify Payments. S externí bránou (Comgate, GoPay) je potřeba samostatný obchod na každou měnu a tedy další předplatné.</p></div>
-    <div class="pvk-card"><h3>Shopify Plus</h3><span class="pvk-pill pvk-l3">až 50 trhů + 9 expansion stores v ceně</span><p>Markets pro většinu případů, expansion stores pro trhy s odlišným sortimentem, sklady nebo bránou. Licence se nemění s počtem trhů. Mění se jen při obratu nad cca 10 mil. € (0,25 % GMV).</p></div>
-    <div class="pvk-card"><h3>Shoptet (Business, Profi, Enterprise)</h3><span class="pvk-pill pvk-l1">vlastní doména = nová instance</span><p>Business a Profi potřebují pro cizí jazyky a měny placený doplněk, Enterprise je má v tarifu. Jazykové verze běží v jedné administraci na jedné doméně. Pro .sk, .pl, .hu domény je potřeba další e-shop (tarif, doplňky, správa objednávek a obsahu zvlášť) a synchronizace produktů a skladů přes doplňky.</p></div>
-    <div class="pvk-card"><h3>Shoptet Premium</h3><span class="pvk-pill pvk-l2">neomezené jazyky a měny, cena individuální</span><p>Více jazyků a měn je v ceně. Vstup na nový trh Shoptet uvádí „za 1 měsíc“. Cena za další doménu nebo trh se domlouvá individuálně.</p></div>
-    <div class="pvk-card"><h3>Upgates</h3><span class="pvk-pill pvk-l3">domény 750 Kč/měs. (2.–5.), 350 Kč (6.+)</span><p>Jedna administrace, neomezené jazyky na Platinum, ceníky per jazyk a měnu, každý jazyk může mít vlastní doménu za malý příplatek.</p></div>
-    <div class="pvk-card"><h3>Shopware 6</h3><span class="pvk-pill pvk-l3">neomezené sales channels</span><p>Každý trh je sales channel (doména, jazyk, měna, ceny, sortiment) v jedné instanci. Bez licenčního příplatku, roste jen hosting a údržba.</p></div>
-    <div class="pvk-card"><h3>Magento / Adobe Commerce</h3><span class="pvk-pill pvk-l3">multi-website zdarma</span><p>Website / Store / Store View hierarchie, nejflexibilnější model pro více zemí. Licence Adobe Commerce se řídí GMV, ne počtem webů. Náročné na vývoj a provoz.</p></div>
-    <div class="pvk-card"><h3>PrestaShop</h3><span class="pvk-pill pvk-l2">multistore zdarma</span><p>Multistore v jedné administraci bez příplatku. Kompatibilita modulů s multistore bývá problém, provoz je pak pracnější.</p></div>
+    <div class="pvk-card" data-fam="shopify"><h3>Shopify Grow a Advanced</h3><span class="pvk-pill pvk-l3">Markets bez příplatku za trh</span><p>Shopify Markets: jeden obchod, trhy s vlastní doménou nebo podadresářem, měnou, jazykem a cenami. Aktivace trhu nic nestojí. Nižší tarify mají omezený počet marketů, ale jeden market může pokrýt více zemí (i s prodejem v lokální měně) a dají se použít submarkety. Platba v měně zákazníka jen se Shopify Payments. S externí bránou (Comgate, GoPay) se v checkoutu platí v základní měně obchodu.</p></div>
+    <div class="pvk-card" data-fam="shopify"><h3>Shopify Plus</h3><span class="pvk-pill pvk-l3">až 50 trhů + 9 expansion stores v ceně</span><p>Markets pro většinu případů, expansion stores pro trhy s odlišným sortimentem, sklady nebo bránou. Licence se nemění s počtem trhů. Mění se jen při obratu nad cca 10 mil. € (0,25 % GMV).</p></div>
+    <div class="pvk-card" data-fam="shoptet"><h3>Shoptet (Business, Profi, Enterprise)</h3><span class="pvk-pill pvk-l1">vlastní doména = nová instance</span><p>Business a Profi potřebují pro cizí jazyky a měny placený doplněk, Enterprise je má v tarifu. Jazykové verze běží v jedné administraci na jedné doméně. Pro .sk, .pl, .hu domény je potřeba další e-shop (tarif, doplňky, správa objednávek a obsahu zvlášť) a synchronizace produktů a skladů přes doplňky.</p></div>
+    <div class="pvk-card" data-fam="shoptet"><h3>Shoptet Premium</h3><span class="pvk-pill pvk-l2">neomezené jazyky a měny, cena individuální</span><p>Více jazyků a měn je v ceně. Vstup na nový trh Shoptet uvádí „za 1 měsíc“. Cena za další doménu nebo trh se domlouvá individuálně.</p></div>
+    <div class="pvk-card" data-fam="upgates"><h3>Upgates</h3><span class="pvk-pill pvk-l3">domény 750 Kč/měs. (2.–5.), 350 Kč (6.+)</span><p>Jedna administrace, neomezené jazyky na Platinum, ceníky per jazyk a měnu, každý jazyk může mít vlastní doménu za malý příplatek.</p></div>
+    <div class="pvk-card" data-fam="shopware"><h3>Shopware 6</h3><span class="pvk-pill pvk-l3">neomezené sales channels</span><p>Každý trh je sales channel (doména, jazyk, měna, ceny, sortiment) v jedné instanci. Bez licenčního příplatku, roste jen hosting a údržba.</p></div>
+    <div class="pvk-card" data-fam="magento"><h3>Magento / Adobe Commerce</h3><span class="pvk-pill pvk-l3">multi-website zdarma</span><p>Website / Store / Store View hierarchie, nejflexibilnější model pro více zemí. Licence Adobe Commerce se řídí GMV, ne počtem webů. Náročné na vývoj a provoz.</p></div>
+    <div class="pvk-card" data-fam="presta"><h3>PrestaShop</h3><span class="pvk-pill pvk-l2">multistore zdarma</span><p>Multistore v jedné administraci bez příplatku. Kompatibilita modulů s multistore bývá problém, provoz je pak pracnější.</p></div>
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-pay">
+<section aria-labelledby="pvk-h-pay" data-view="pay">
   <h2 id="pvk-h-pay">Platební brány</h2>
   <p>Ceníkové sazby pro online karty, obchodník se sídlem v ČR. U velkých obratů jsou sazby externích bran i Shopify Payments (Plus) vyjednatelné.</p>
   <div class="pvk-scroll">
     <table>
       <thead><tr><th>Brána / platforma</th><th>Karty EHP</th><th>Karty mimo EHP</th><th>Poplatek platformy navíc</th><th>Poznámka</th></tr></thead>
       <tbody>
-        <tr><td class="pvk-name">Shopify Payments – Basic / Grow</td><td class="pvk-num">1,9 % / 1,8 % + 6,50 Kč</td><td class="pvk-num">2,9 % / 2,8 % + 6,50 Kč</td><td>0</td><td>Multi-currency (ceny v měně zákazníka) funguje jen se Shopify Payments.</td></tr>
-        <tr><td class="pvk-name">Shopify Payments – Advanced</td><td class="pvk-num">1,6 % + 6,50 Kč</td><td class="pvk-num">2,6 % + 6,50 Kč</td><td>0</td><td>Konverze měn při výplatě cca 2 %, odpadá při výplatě na účet v měně trhu.</td></tr>
-        <tr><td class="pvk-name">Shopify Payments – Plus</td><td class="pvk-num">1,3 % + 6,50 Kč</td><td class="pvk-num">2,3 % + 6,50 Kč</td><td>0</td><td>Sazby lze vyjednat. Klarna 3,99 % + 8,50 Kč.</td></tr>
-        <tr><td class="pvk-name">Externí brána na Shopify</td><td class="pvk-num">sazba brány</td><td class="pvk-num">sazba brány</td><td class="pvk-num">2 % / 1 % / 0,6 % / 0,2 %</td><td>Basic / Grow / Advanced / Plus. Bez multi-currency v jednom obchodě → samostatný obchod na měnu.</td></tr>
-        <tr><td class="pvk-name">Shoptet Pay</td><td class="pvk-num">1,99 % + 2,80 Kč (Free) až 1,19 % + 1,90 Kč (Enterprise)</td><td class="pvk-num">cca 3,55 % + 5,23 Kč (Business)</td><td>0, bez měsíčního poplatku</td><td>Premium individuálně. Měny CZK, EUR, PLN, HUF, RON a další.</td></tr>
-        <tr><td class="pvk-name">Comgate / GoPay na Shoptetu</td><td class="pvk-num">cca 1 %</td><td class="pvk-num">vyšší, dle smlouvy</td><td class="pvk-num">200 Kč/měs. doplněk</td><td>Shoptet si z transakcí externích bran nic nebere.</td></tr>
+        <tr data-fam="shopify"><td class="pvk-name">Shopify Payments – Basic / Grow</td><td class="pvk-num">1,9 % / 1,8 % + 6,50 Kč</td><td class="pvk-num">2,9 % / 2,8 % + 6,50 Kč</td><td>0</td><td>Multi-currency (ceny v měně zákazníka) funguje jen se Shopify Payments.</td></tr>
+        <tr data-fam="shopify"><td class="pvk-name">Shopify Payments – Advanced</td><td class="pvk-num">1,6 % + 6,50 Kč</td><td class="pvk-num">2,6 % + 6,50 Kč</td><td>0</td><td>Konverze měn při výplatě cca 2 %, odpadá při výplatě na účet v měně trhu.</td></tr>
+        <tr data-fam="shopify"><td class="pvk-name">Shopify Payments – Plus</td><td class="pvk-num">1,3 % + 6,50 Kč</td><td class="pvk-num">2,3 % + 6,50 Kč</td><td>0</td><td>Sazby lze vyjednat. Klarna 3,99 % + 8,50 Kč.</td></tr>
+        <tr data-fam="shopify"><td class="pvk-name">Externí brána na Shopify</td><td class="pvk-num">sazba brány</td><td class="pvk-num">sazba brány</td><td class="pvk-num">2 % / 1 % / 0,6 % / 0,2 %</td><td>Basic / Grow / Advanced / Plus. Checkout v základní měně obchodu.</td></tr>
+        <tr data-fam="shoptet"><td class="pvk-name">Shoptet Pay</td><td class="pvk-num">1,99 % + 2,80 Kč (Free) až 1,19 % + 1,90 Kč (Enterprise)</td><td class="pvk-num">cca 3,55 % + 5,23 Kč (Business)</td><td>0, bez měsíčního poplatku</td><td>Premium individuálně. Měny CZK, EUR, PLN, HUF, RON a další.</td></tr>
+        <tr data-fam="shoptet"><td class="pvk-name">Comgate / GoPay na Shoptetu</td><td class="pvk-num">cca 1 %</td><td class="pvk-num">vyšší, dle smlouvy</td><td class="pvk-num">200 Kč/měs. doplněk</td><td>Shoptet si z transakcí externích bran nic nebere.</td></tr>
         <tr><td class="pvk-name">Comgate</td><td class="pvk-num">cca 1 % + 0 Kč</td><td class="pvk-num">dle smlouvy</td><td>– (Upgates, Shopware, Magento, Presta)</td><td>Bankovní převod cca 5 Kč. Bez měsíčního poplatku u většiny tarifů.</td></tr>
         <tr><td class="pvk-name">GoPay</td><td class="pvk-num">cca 0,95–1,4 %</td><td class="pvk-num">dle smlouvy</td><td>–</td><td>Bankovní převod cca 7 Kč. Měsíční poplatek dle tarifu.</td></tr>
         <tr><td class="pvk-name">Stripe</td><td class="pvk-num">1,5 % + 2,50 Kč</td><td class="pvk-num">2,5 % + 2,50 Kč</td><td>–</td><td>Silný pro expanzi mimo CZ (lokální metody, BLIK, iDEAL…).</td></tr>
@@ -145,14 +165,14 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-feat">
+<section aria-labelledby="pvk-h-feat" data-view="feat">
   <h2 id="pvk-h-feat">Funkční srovnání platforem</h2>
   <p>Štítek ukazuje, jak dobře platforma danou oblast pokrývá pro středního až velkého obchodníka: <span class="pvk-pill pvk-l3">silné</span> <span class="pvk-pill pvk-l2">s omezením</span> <span class="pvk-pill pvk-l1">slabé</span></p>
   <div class="pvk-scroll">
     <table class="pvk-feat">
-      <thead><tr><th>Oblast</th><th>Shopify Basic / Grow</th><th>Shopify Advanced</th><th>Shopify Plus</th><th>Shoptet (Basic / Business / Profi / Enterprise)</th><th>Shoptet Premium</th><th>Upgates</th><th>Shopware 6</th><th>Magento / Adobe Commerce</th><th>PrestaShop</th></tr></thead>
+      <thead><tr><th>Oblast</th><th data-fam="shopify">Shopify Basic / Grow</th><th data-fam="shopify">Shopify Advanced</th><th data-fam="shopify">Shopify Plus</th><th data-fam="shoptet">Shoptet (Basic / Business / Profi / Enterprise)</th><th data-fam="shoptet">Shoptet Premium</th><th data-fam="upgates">Upgates</th><th data-fam="shopware">Shopware 6</th><th data-fam="magento">Magento / Adobe Commerce</th><th data-fam="presta">PrestaShop</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Provozní model</th><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, hosting a upgrady řeší Shopify</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, hosting a upgrady řeší Shopify</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, vyšší limity, prioritní podpora</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, dedikovaný account manager</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Self-host / PaaS / SaaS</td><td><span class="pvk-pill pvk-l1">slabé</span><br>OS self-host; Adobe PaaS/SaaS</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Self-host nebo Hosted</td></tr>
+        <tr><th scope="row">Provozní model</th><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, hosting a upgrady řeší Shopify</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, hosting a upgrady řeší Shopify</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, vyšší limity, prioritní podpora</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS, dedikovaný account manager</td><td><span class="pvk-pill pvk-l3">silné</span><br>SaaS</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Self-host / PaaS / SaaS</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>OS self-host; Adobe PaaS/SaaS</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Self-host nebo Hosted</td></tr>
         <tr><th scope="row">Limit produktů</th><td><span class="pvk-pill pvk-l3">silné</span><br>Bez limitu (až 2 048 variant)</td><td><span class="pvk-pill pvk-l3">silné</span><br>Bez limitu (až 2 048 variant)</td><td><span class="pvk-pill pvk-l3">silné</span><br>Bez limitu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>100 / 1 000 / 5 000 / 50 000</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>100 000</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>50 000 (Platinum)</td><td><span class="pvk-pill pvk-l3">silné</span><br>Dle infrastruktury</td><td><span class="pvk-pill pvk-l3">silné</span><br>Dle infrastruktury</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle infrastruktury, výkon slábne</td></tr>
         <tr><th scope="row">Více zemí / trhů</th><td><span class="pvk-pill pvk-l3">silné</span><br>Markets bez příplatku; více zemí v jednom marketu, submarkety</td><td><span class="pvk-pill pvk-l3">silné</span><br>Markets bez příplatku; více zemí v jednom marketu, submarkety</td><td><span class="pvk-pill pvk-l3">silné</span><br>50 trhů + 9 expansion stores</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Doména = nový e-shop</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Jazyky a měny ano, domény individuálně</td><td><span class="pvk-pill pvk-l3">silné</span><br>Jazyky, měny, domény v 1 adminu</td><td><span class="pvk-pill pvk-l3">silné</span><br>Sales channels bez limitu</td><td><span class="pvk-pill pvk-l3">silné</span><br>Multi-website</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Multistore</td></tr>
         <tr><th scope="row">Ceny a sortiment per trh</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>Ceny per trh, katalogy omezeně</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Ceny per trh, katalogy omezeně</td><td><span class="pvk-pill pvk-l3">silné</span><br>Katalogy a ceníky per trh i B2B</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Cenové skupiny, jinak per instance</td><td><span class="pvk-pill pvk-l3">silné</span><br>Na míru</td><td><span class="pvk-pill pvk-l3">silné</span><br>Ceníky per jazyk/měnu</td><td><span class="pvk-pill pvk-l3">silné</span><br>Rule builder, ceny per kanál</td><td><span class="pvk-pill pvk-l3">silné</span><br>Price scope per website</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Per shop</td></tr>
@@ -162,21 +182,21 @@
         <tr><th scope="row">CZ/SK ekosystém (Heureka, Zásilkovna, feedy, EET/účetnictví)</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>Přes aplikace</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Přes aplikace</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Přes aplikace a middleware</td><td><span class="pvk-pill pvk-l3">silné</span><br>Nativně, desítky doplňků</td><td><span class="pvk-pill pvk-l3">silné</span><br>Nativně</td><td><span class="pvk-pill pvk-l3">silné</span><br>Nativně</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Málo CZ pluginů</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Moduly, komunita slábne</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Moduly</td></tr>
         <tr><th scope="row">Napojení ERP (Pohoda, Money, Helios, SAP)</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>Aplikace nebo middleware</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Aplikace nebo middleware</td><td><span class="pvk-pill pvk-l3">silné</span><br>Middleware nebo integrační platforma, vysoké API limity</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Doplňky pro Pohodu/Money</td><td><span class="pvk-pill pvk-l3">silné</span><br>Integrace přes API</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Doplňky, API</td><td><span class="pvk-pill pvk-l3">silné</span><br>API, pluginy</td><td><span class="pvk-pill pvk-l3">silné</span><br>API, moduly</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Moduly</td></tr>
         <tr><th scope="row">Upgrady a bezpečnost</th><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l3">silné</span><br>Řeší dodavatel</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Na vás (mimo SaaS)</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Na vás, náročné upgrady</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Na vás</td></tr>
-        <tr><th scope="row">Výkon ve špičkách</th><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování</td><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování</td><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování, vysoké limity checkoutu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Sdílená infrastruktura</td><td><span class="pvk-pill pvk-l3">silné</span><br>Posílená infrastruktura</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Sdílená infrastruktura</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle hostingu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle hostingu</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Dle hostingu, slabší výkon</td></tr>
-        <tr><th scope="row">Partneři v CZ/SK</th><td><span class="pvk-pill pvk-l3">silné</span><br>Rostoucí síť</td><td><span class="pvk-pill pvk-l3">silné</span><br>Rostoucí síť</td><td><span class="pvk-pill pvk-l3">silné</span><br>Rostoucí síť</td><td><span class="pvk-pill pvk-l3">silné</span><br>Velmi široká</td><td><span class="pvk-pill pvk-l3">silné</span><br>Shoptet + partneři</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Střední</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Málo</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Střední, ubývá</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Málo</td></tr>
+        <tr><th scope="row">Výkon ve špičkách</th><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování</td><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování</td><td><span class="pvk-pill pvk-l3">silné</span><br>Automatické škálování, vysoké limity checkoutu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Sdílená infrastruktura</td><td><span class="pvk-pill pvk-l3">silné</span><br>Posílená infrastruktura</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Sdílená infrastruktura</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle hostingu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle hostingu</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Dle hostingu</td></tr>
+        <tr><th scope="row">Partneři v CZ/SK</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>Menší, rostoucí síť</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Menší, rostoucí síť</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Menší, rostoucí síť</td><td><span class="pvk-pill pvk-l3">silné</span><br>Velmi široká</td><td><span class="pvk-pill pvk-l3">silné</span><br>Shoptet + partneři</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Střední</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Málo</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Střední, ubývá</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Málo</td></tr>
         <tr><th scope="row">Účty, reporty, sazby plateb</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>Basic: méně účtů, Shopify Payments 1,9 %, externí brána +2 %. Grow: 5 účtů, 1,8 %, externí brána +1 %</td><td><span class="pvk-pill pvk-l3">silné</span><br>15 účtů, vlastní reporty, Shopify Payments 1,6 %</td><td><span class="pvk-pill pvk-l3">silné</span><br>Neomezeně účtů, reporty, 1,3 % a vyjednatelné</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Shoptet Pay 1,80 % (Basic) až 1,19 % (Enterprise)</td><td><span class="pvk-pill pvk-l3">silné</span><br>Account manager, individuální sazby</td><td><span class="pvk-pill pvk-l3">silné</span><br>Neomezeně uživatelů</td><td><span class="pvk-pill pvk-l3">silné</span><br>Dle edice</td><td><span class="pvk-pill pvk-l3">silné</span><br>Bez limitu</td><td><span class="pvk-pill pvk-l3">silné</span><br>Bez limitu</td></tr>
-        <tr><th scope="row">Typicky pro</th><td>Basic: menší obchody a start. Grow: většina středních D2C/B2C obchodů</td><td>Vyšší obraty přes Shopify Payments (nižší sazby), vlastní reporty</td><td>Mid-market až enterprise, expanze po EU, B2B</td><td>Lokální CZ/SK obchod</td><td>Velký lokální obchod se specifiky</td><td>Střední CZ/SK obchod s více jazyky</td><td>B2B, DACH, komplexní katalog</td><td>Stávající instalace, velmi specifické procesy</td><td>Rozpočtové projekty, FR/ES/IT/PL</td></tr>
+        <tr><th scope="row">Typicky pro</th><td>Basic: menší obchody a start. Grow: většina středních D2C/B2C obchodů</td><td>Vyšší obraty přes Shopify Payments (nižší sazby), vlastní reporty</td><td>Mid-market až enterprise, expanze po EU, B2B</td><td>Lokální CZ/SK obchod</td><td>Velký lokální obchod se specifiky</td><td>Střední CZ/SK obchod s více jazyky</td><td>B2B, DACH, komplexní katalog</td><td>Komplexní projekty s vlastním vývojem, velmi specifické procesy</td><td>Projekty bez licenčních poplatků s vlastním vývojem, silná komunita ve FR/ES/IT/PL</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-start">
+<section aria-labelledby="pvk-h-start" data-view="feat">
   <h2 id="pvk-h-start">Startovací řešení: kdy dávají smysl a kde končí</h2>
-  <p>Eshop-rychle, SimpleShop, Webnode a Wix jsou levné a rychlé na spuštění. Pro seriózní prodej se středním nebo velkým obratem ale narážejí na limity v katalogu, integracích, expanzi a škálování. Kalkulačka je počítá stejně jako ostatní, aby bylo vidět, kde se vyplatí a kde už ne.</p>
+  <p>Eshop-rychle, SimpleShop, Webnode a Wix jsou levné a rychlé na spuštění. S rostoucím obratem ale narážejí na limity v katalogu, integracích, expanzi a škálování. Kalkulačka je počítá stejně jako ostatní, aby bylo vidět, kde se vyplatí a kde už ne.</p>
   <div class="pvk-scroll">
     <table class="pvk-feat">
-      <thead><tr><th>Kritérium</th><th>Eshop-rychle</th><th>SimpleShop</th><th>Webnode</th><th>Wix</th></tr></thead>
+      <thead><tr><th>Kritérium</th><th data-fam="erychle">Eshop-rychle</th><th data-fam="simpleshop">SimpleShop</th><th data-fam="webnode">Webnode</th><th data-fam="wix">Wix</th></tr></thead>
       <tbody>
         <tr><th scope="row">Co to je</th><td>Česká SaaS platforma pro malé a menší e-shopy</td><td>Prodejní formuláře vkládané do vlastního webu (bez e-shopu a katalogu), hlavně na kurzy, e-booky, členství a vstupenky; umí i fyzické zboží</td><td>Webový builder (CZ) s e-shop modulem</td><td>Globální webový builder s modulem Wix Stores</td></tr>
         <tr><th scope="row">Cena</th><td>Hobby 312 Kč, Startup 472 Kč, Business 952 Kč/měs. (2letá platba), Individual na míru</td><td>3,9 % z obratu, nebo 0,9 % + 1 390 Kč/měs.; systém sám vybere levnější. Min. 2 Kč za objednávku</td><td>Cca 108–739 Kč/měs. podle tarifu</td><td>Core 29 $, Business 39 $, Business Elite 159 $/měs. (roční platba)</td></tr>
@@ -187,25 +207,10 @@
         <tr><th scope="row">B2B, API, ERP</th><td><span class="pvk-pill pvk-l2">s omezením</span><br>API od Startup, velkoobchod od Business</td><td><span class="pvk-pill pvk-l2">s omezením</span><br>Developer API, Make</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Prakticky ne</td><td><span class="pvk-pill pvk-l1">slabé</span><br>API ano, B2B a napojení ERP slabé</td></tr>
         <tr><th scope="row">Škálování a partneři</th><td><span class="pvk-pill pvk-l1">slabé</span><br>Malý dodavatel, málo partnerů</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Poplatek roste s obratem, není stavěný na velký katalog</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Omezené úpravy, šablonu nelze po založení změnit</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Výkon a SEO u velkých katalogů slabší, málo CZ partnerů</td></tr>
         <tr><th scope="row">Kdy použít</th><td>Malý CZ e-shop, start s minimálními náklady</td><td>Kurzy, e-booky, členství, vstupenky, tvůrci a lektoři</td><td>Prezentační web s pár produkty</td><td>Firma, kde je hlavní web a e-shop jen doplněk; zahraniční publikum</td></tr>
-        <tr><th scope="row">Proč ne pro seriózní prodej</th><td><span class="pvk-pill pvk-l1">slabé</span><br>Slabší integrace, expanze a ekosystém; závislost na malém dodavateli</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Při 50 mil. Kč obratu stojí poplatek cca 470 tis. Kč ročně; chybí katalogové funkce, feedy, sklady</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Omezené slevy, doprava, SEO a feedy; nelze škálovat</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Chybí CZ ekosystém, omezená lokalizace a integrace; migrace dat ven je pracná</td></tr>
+        <tr><th scope="row">Limity při růstu</th><td><span class="pvk-pill pvk-l1">slabé</span><br>Slabší integrace, expanze a ekosystém; závislost na malém dodavateli</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Při 50 mil. Kč obratu stojí poplatek cca 470 tis. Kč ročně; chybí katalogové funkce, feedy, sklady</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Omezené slevy, doprava, SEO a feedy; nelze škálovat</td><td><span class="pvk-pill pvk-l1">slabé</span><br>Chybí CZ ekosystém, omezená lokalizace a integrace; migrace dat ven je pracná</td></tr>
       </tbody>
     </table>
   </div>
-</section>
-
-<section aria-labelledby="pvk-h-rec">
-  <h2 id="pvk-h-rec">Co z toho plyne</h2>
-  <ul>
-    <li><strong>Jen CZ, případně CZ + SK:</strong> Shoptet Enterprise a Upgates jsou licenčně nejlevnější a mají nativně český ekosystém. Shoptet ale s každou vlastní doménou přidává celou instanci a provozní práci (dva admini, synchronizace).</li>
-    <li><strong>Shopify Grow stačí většině středních merchantů:</strong> Markets, jazyky, domény i měny má stejně jako Advanced. Advanced přináší hlavně nižší sazby plateb (1,6 % místo 1,8 %), vlastní reporty a víc účtů zaměstnanců. Při obratu přes Shopify Payments nad cca 35 mil. Kč ročně vyjde Advanced levněji.</li>
-    <li><strong>3 a více trhů s vlastními doménami:</strong> Shopify Plus má expanzi v ceně (50 trhů, 9 expansion stores). Nad cca 10 mil. € obratu roste licence přes 0,25 % GMV. Shopify Advanced má Markets také bez příplatku a vychází levněji, pokud nepotřebujete B2B, Checkout Extensibility a expansion stores a platíte přes Shopify Payments.</li>
-    <li><strong>Komplexní B2B nebo DACH:</strong> Shopware 6 (Evolve) má trhy jako sales channels bez příplatku, ale vyšší náklady na hosting, vývoj a údržbu.</li>
-    <li><strong>Magento:</strong> Open Source má nulovou licenci, ale nejvyšší provozní náklady a náročné upgrady. Adobe Commerce je licenčně nejdražší varianta. Dnes typicky kandidát na migraci, ne na nový projekt.</li>
-    <li><strong>PrestaShop:</strong> levná licence i multistore, v CZ/SK ale malá partnerská síť a multistore bývá provozně křehký.</li>
-    <li><strong>Startovací řešení (Eshop-rychle, SimpleShop, Webnode, Wix):</strong> dávají smysl pro start, malé katalogy, prodej kurzů a digitálních produktů (SimpleShop) nebo web s pár produkty. Pro středního a velkého obchodníka chybí katalogové funkce, integrace na ERP a sklady, CZ ekosystém (u Wixu) a rozumná expanze. SimpleShop navíc bere procento z obratu, takže s růstem prudce zdražuje.</li>
-    <li><strong>Vstupní tarify Shopify Basic a Shoptet Basic:</strong> stejná platforma jako vyšší tarify, takže růst neznamená migraci. Shopify Basic má vyšší sazby plateb (1,9 %, externí brána +2 %), Shoptet Basic limit 100 produktů.</li>
-    <li><strong>Platby:</strong> u 200 mil. Kč obratu znamená rozdíl 0,3 p. b. v sazbě brány cca 400 tis. Kč ročně. Často víc než rozdíl v licenci, proto se vyplatí sazby vyjednat.</li>
-  </ul>
 </section>
 
 <section aria-labelledby="pvk-h-ass">
