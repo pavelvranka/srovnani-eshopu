@@ -27,6 +27,15 @@ Barvy grafu a štítků lze přepsat v CSS šablony, např.:
 
 == Changelog ==
 
+= 1.3.3 =
+* Oprava: rozsypané řádky Webnode, Eshop-rychle a SimpleShop v tabulce AI.
+
+= 1.3.2 =
+* Kapitola o AI: sloupce v pořadí podle váhy (MCP, AI pomocník, nákup přes agenty), Shoptet Premium až za nižšími tarify.
+
+= 1.3.1 =
+* Kapitola o AI: platformy seřazené podle síly (MCP, AI pomocník, nákup přes agenty).
+
 = 1.3.0 =
 * Nová kapitola „AI a nákup přes AI agenty“: AI pomocníci v administraci, napojení přes MCP, agentní nakupování.
 * Plovoucí navigace po sekcích (náklady, trhy, platební brány, funkční srovnání, AI).
