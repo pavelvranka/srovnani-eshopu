@@ -279,7 +279,7 @@
   // Statický obsah: sloupce tabulek podle th[data-fam], řádky a karty s data-fam.
   // Sekci, ve které nezůstane žádný sloupec platformy, skryje celou.
   function filterStatic(on) {
-    Array.prototype.forEach.call(root.querySelectorAll('table'), function (t) {
+    Array.prototype.forEach.call(root.querySelectorAll('.pvk-scroll table'), function (t) {
       if (!t.tHead) return;
       var cols = [];
       Array.prototype.forEach.call(t.tHead.rows[0].cells, function (th, i) {
@@ -387,6 +387,7 @@
       a.link.hidden = !!(sec && sec.hidden);
     });
     updateScrollers();
+    if (heads) updateHeads(true);
   }
 
   // Plovoucí navigace: zvýrazní sekci, ve které čtenář právě je.
@@ -410,7 +411,7 @@
   var navTick = false;
   window.addEventListener('scroll', function () {
     if (navTick) return; navTick = true;
-    window.requestAnimationFrame(function () { navTick = false; updateNav(); });
+    window.requestAnimationFrame(function () { navTick = false; updateNav(); updateHeads(); });
   }, { passive: true });
 
   // Ukotvený první sloupec a lišta potřebují neprůhledné pozadí: převezmou
@@ -440,7 +441,49 @@
   Array.prototype.forEach.call(scrollers, function (box) {
     box.addEventListener('scroll', function () { updateScroll(box); }, { passive: true });
   });
-  window.addEventListener('resize', updateScrollers);
+  window.addEventListener('resize', function () { updateScrollers(); updateHeads(true); });
+
+  // Plovoucí záhlaví tabulek: tabulka je kvůli posunu do strany ve vlastním
+  // posuvném kontejneru, takže thead nemůže být sticky vůči oknu. Když záhlaví
+  // zajede pod navigaci, ukáže se jeho kopie přichycená pod lištou (fixed),
+  // se stejnými šířkami sloupců a stejným posunem do strany.
+  var heads = Array.prototype.map.call(scrollers, function (box) {
+    var table = box.querySelector('table');
+    var wrap = el('div', 'pvk-sh'), clone = el('table', table.className);
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.hidden = true;
+    wrap.appendChild(clone);
+    box.parentNode.insertBefore(wrap, box);
+    box.addEventListener('scroll', function () { wrap.scrollLeft = box.scrollLeft; }, { passive: true });
+    return { box: box, table: table, wrap: wrap, clone: clone, dirty: true };
+  });
+  function updateHeads(dirty) {
+    var top = Math.max(0, nav.getBoundingClientRect().bottom);
+    heads.forEach(function (h) {
+      if (dirty) h.dirty = true;
+      var th = h.table.tHead, tr = h.table.getBoundingClientRect(), hr = th.getBoundingClientRect();
+      var show = h.box.offsetParent !== null && hr.top < top && tr.bottom > top + hr.height * 2;
+      if (!show) { h.wrap.hidden = true; return; }
+      if (h.wrap.hidden || h.dirty) { // nová kopie záhlaví (mohly se změnit sloupce)
+        h.clone.textContent = '';
+        h.clone.appendChild(th.cloneNode(true));
+        Array.prototype.forEach.call(h.clone.querySelectorAll('[id]'), function (e) { e.removeAttribute('id'); });
+        h.dirty = false;
+      }
+      var src = th.rows[0].cells, dst = h.clone.tHead.rows[0].cells;
+      for (var i = 0; i < src.length; i++) {
+        var w = src[i].getBoundingClientRect().width + 'px';
+        dst[i].style.width = dst[i].style.minWidth = dst[i].style.maxWidth = w;
+      }
+      var br = h.box.getBoundingClientRect();
+      h.clone.style.width = tr.width + 'px';
+      h.wrap.style.top = top + 'px';
+      h.wrap.style.left = br.left + 'px';
+      h.wrap.style.width = h.box.clientWidth + 'px';
+      h.wrap.hidden = false;
+      h.wrap.scrollLeft = h.box.scrollLeft;
+    });
+  }
 
   $('costMore').addEventListener('click', function () { S.allCosts = !S.allCosts; render(); });
   $('platAll').addEventListener('click', function () {

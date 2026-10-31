@@ -30,6 +30,7 @@ Barvy grafu a štítků lze přepsat v CSS šablony, např.:
 = 1.2.0 =
 * Plovoucí navigace po sekcích (náklady, trhy, platební brány, funkční srovnání).
 * Souhrn 3 nejlevnějších variant, barevné rozlišení SaaS / self-hosted / startovací řešení.
+* Záhlaví tabulek zůstává při rolování vidět pod navigací.
 * Ukotvený první sloupec v širokých tabulkách, poznámky v rozpisu nákladů sbalené pod „více“.
 * Filtr platforem nad výsledky, platí pro náklady, trhy, expanzi, platební brány i funkční srovnání.
 * Přepínače trhů a platební brány jako radio buttony.
