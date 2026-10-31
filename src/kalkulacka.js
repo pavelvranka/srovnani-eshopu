@@ -35,32 +35,33 @@
   };
 
   var GMV_STEPS = [5e4, 1e5, 2e5, 5e5, 1e6, 2e6, 5e6, 1e7, 2e7, 5e7, 1e8, 2e8, 5e8];
-  var S = { n: 2, allCosts: false };
+  var S = { n: 2, allCosts: false, notes: {} }; // notes: rozbalené poznámky podle id platformy
   var COST_ROWS = 5; // řádků rozpisu nákladů před „Zobrazit vše“
 
   // apps = placené aplikace €/měs. (odhad), host = hosting €/měs. (odhad, jen self-hosted),
   // maintH = nutná technická údržba h/měs. (odhad, jen self-hosted)
   var P = [
-    { id: 'basic', fam: 'shopify', api: true, name: 'Shopify Basic', group: 'entry', apps: 100, host: 0, maintH: 0 },
-    { id: 'grow', fam: 'shopify', api: true, name: 'Shopify Grow', apps: 150, host: 0, maintH: 0 },
-    { id: 'advanced', fam: 'shopify', api: true, name: 'Shopify Advanced', apps: 200, host: 0, maintH: 0 },
-    { id: 'plus', fam: 'shopify', api: true, name: 'Shopify Plus', apps: 500, host: 0, maintH: 0 },
-    { id: 'stBasic', fam: 'shoptet', api: false, name: 'Shoptet Basic', group: 'entry', apps: 40, host: 0, maintH: 0 },
-    { id: 'stBusiness', fam: 'shoptet', api: false, name: 'Shoptet Business', apps: 60, host: 0, maintH: 0 },
-    { id: 'stProfi', fam: 'shoptet', api: false, name: 'Shoptet Profi', apps: 60, host: 0, maintH: 0 },
-    { id: 'shoptet', fam: 'shoptet', api: false, name: 'Shoptet Enterprise', apps: 60, host: 0, maintH: 0 },
-    { id: 'premium', fam: 'shoptet', api: true, name: 'Shoptet Premium', apps: 100, host: 0, maintH: 0 },
-    { id: 'upgates', fam: 'upgates', api: true, name: 'Upgates', apps: 60, host: 0, maintH: 0 },
-    { id: 'shopware', fam: 'shopware', api: true, name: 'Shopware 6', apps: 200, host: 350, maintH: 15 },
-    { id: 'magento', fam: 'magento', api: true, name: 'Magento Open Source', apps: 200, host: 450, maintH: 25 },
-    { id: 'adobe', fam: 'magento', api: true, name: 'Adobe Commerce', apps: 200, host: 0, maintH: 15 },
-    { id: 'presta', fam: 'presta', api: true, name: 'PrestaShop', apps: 150, host: 200, maintH: 15 },
-    { id: 'erychle', fam: 'erychle', api: false, name: 'Eshop-rychle', group: 'starter', apps: 0, host: 0, maintH: 0 },
-    { id: 'simpleshop', fam: 'simpleshop', api: false, name: 'SimpleShop', group: 'starter', apps: 0, host: 0, maintH: 0 },
-    { id: 'webnode', fam: 'webnode', api: false, name: 'Webnode Profi', group: 'starter', apps: 0, host: 0, maintH: 0 },
-    { id: 'wix', fam: 'wix', api: true, name: 'Wix (Core / Business)', group: 'starter', apps: 30, host: 0, maintH: 0 }
+    { id: 'basic', fam: 'shopify', kind: 'saas', api: true, name: 'Shopify Basic', group: 'entry', apps: 100, host: 0, maintH: 0 },
+    { id: 'grow', fam: 'shopify', kind: 'saas', api: true, name: 'Shopify Grow', apps: 150, host: 0, maintH: 0 },
+    { id: 'advanced', fam: 'shopify', kind: 'saas', api: true, name: 'Shopify Advanced', apps: 200, host: 0, maintH: 0 },
+    { id: 'plus', fam: 'shopify', kind: 'saas', api: true, name: 'Shopify Plus', apps: 500, host: 0, maintH: 0 },
+    { id: 'stBasic', fam: 'shoptet', kind: 'saas', api: false, name: 'Shoptet Basic', group: 'entry', apps: 40, host: 0, maintH: 0 },
+    { id: 'stBusiness', fam: 'shoptet', kind: 'saas', api: false, name: 'Shoptet Business', apps: 60, host: 0, maintH: 0 },
+    { id: 'stProfi', fam: 'shoptet', kind: 'saas', api: false, name: 'Shoptet Profi', apps: 60, host: 0, maintH: 0 },
+    { id: 'shoptet', fam: 'shoptet', kind: 'saas', api: false, name: 'Shoptet Enterprise', apps: 60, host: 0, maintH: 0 },
+    { id: 'premium', fam: 'shoptet', kind: 'saas', api: true, name: 'Shoptet Premium', apps: 100, host: 0, maintH: 0 },
+    { id: 'upgates', fam: 'upgates', kind: 'saas', api: true, name: 'Upgates', apps: 60, host: 0, maintH: 0 },
+    { id: 'shopware', fam: 'shopware', kind: 'self', api: true, name: 'Shopware 6', apps: 200, host: 350, maintH: 15 },
+    { id: 'magento', fam: 'magento', kind: 'self', api: true, name: 'Magento Open Source', apps: 200, host: 450, maintH: 25 },
+    { id: 'adobe', fam: 'magento', kind: 'self', api: true, name: 'Adobe Commerce', apps: 200, host: 0, maintH: 15 },
+    { id: 'presta', fam: 'presta', kind: 'self', api: true, name: 'PrestaShop', apps: 150, host: 200, maintH: 15 },
+    { id: 'erychle', fam: 'erychle', kind: 'start', api: false, name: 'Eshop-rychle', apps: 0, host: 0, maintH: 0 },
+    { id: 'simpleshop', fam: 'simpleshop', kind: 'start', api: false, name: 'SimpleShop', apps: 0, host: 0, maintH: 0 },
+    { id: 'webnode', fam: 'webnode', kind: 'start', api: false, name: 'Webnode Profi', apps: 0, host: 0, maintH: 0 },
+    { id: 'wix', fam: 'wix', kind: 'start', api: true, name: 'Wix (Core / Business)', apps: 30, host: 0, maintH: 0 }
   ];
-  var GROUP_LABEL = { entry: 'vstupní tarif', starter: 'startovací řešení' };
+  var GROUP_LABEL = { entry: 'vstupní tarif' };
+  var KIND_LABEL = { saas: 'SaaS', self: 'self-hosted / PaaS', start: 'startovací řešení' };
   var HF = [0.5, 1, 1.6, 2.6]; // násobek hostingu a údržby dle pásma obratu
   var AF = [0.5, 1, 1.5, 2];   // násobek aplikací
 
@@ -233,11 +234,28 @@
     return e;
   }
   function badge(kind) { return el('span', kind === 'od' ? 'pvk-est pvk-min' : 'pvk-est', kind); }
+  // Název platformy: barevný proužek typu (SaaS / self-hosted / startovací),
+  // pro čtečky typ i textem.
+  function platName(node, p) {
+    node.classList.add('pvk-k-' + p.kind);
+    node.appendChild(document.createTextNode(p.name));
+    node.appendChild(el('span', 'pvk-vh', ' (' + KIND_LABEL[p.kind] + ')'));
+    if (p.group) { node.appendChild(document.createTextNode(' ')); node.appendChild(el('span', 'pvk-tag', GROUP_LABEL[p.group])); }
+    return node;
+  }
+  // Poznámky: první vidět hned, ostatní pod „více“. Stav rozbalení přežije překreslení.
   function nameCell(p, notes) {
-    var td = el('td', 'pvk-name');
-    td.appendChild(document.createTextNode(p.name));
-    if (p.group) { td.appendChild(document.createTextNode(' ')); td.appendChild(el('span', 'pvk-tag', GROUP_LABEL[p.group])); }
-    if (notes && notes.length) td.appendChild(el('small', 'pvk-note', notes.join(' ')));
+    var td = platName(el('td', 'pvk-name'), p);
+    if (!notes || !notes.length) return td;
+    td.appendChild(el('small', 'pvk-note', notes[0]));
+    if (notes.length > 1) {
+      var d = el('details', 'pvk-notes');
+      d.open = !!S.notes[p.id];
+      d.appendChild(el('summary', null, 'více'));
+      d.appendChild(el('small', 'pvk-note', notes.slice(1).join(' ')));
+      d.addEventListener('toggle', function () { S.notes[p.id] = d.open; });
+      td.appendChild(d);
+    }
     return td;
   }
   function numCell(v, estKind, extraCls) {
@@ -294,12 +312,23 @@
       (c.mode === 'domain' ? 'vlastní doména na zemi' : 'jazykové verze na 1 doméně') + ', ' +
       (c.gw === 'native' ? 'nativní brány' : 'externí brána') + '. Seřazeno od nejlevnějšího, bez poplatků za platby.';
 
+    var top = $('top'); top.textContent = '';
+    $('topWrap').hidden = !rows.length;
+    rows.slice(0, 3).forEach(function (r) {
+      var li = el('li', 'pvk-top-card pvk-k-' + r.p.kind);
+      li.appendChild(platName(el('div', 'pvk-top-name'), r.p));
+      var v = el('div', 'pvk-top-val', fmt(r.total) + ' / rok');
+      if (r.anyEst) { v.appendChild(document.createTextNode(' ')); v.appendChild(badge('odhad')); }
+      li.appendChild(v);
+      li.appendChild(el('small', 'pvk-note', 'vč. plateb ' + fmt(r.total + r.pay.cost)));
+      top.appendChild(li);
+    });
+
     var max = Math.max.apply(null, rows.map(function (r) { return r.total; }).concat([1]));
     var bars = $('bars'); bars.textContent = '';
     rows.forEach(function (r) {
       var row = el('div', 'pvk-bar');
-      var nm = el('div', 'pvk-bar-name', r.p.name);
-      if (r.p.group) { nm.appendChild(document.createTextNode(' ')); nm.appendChild(el('span', 'pvk-tag', GROUP_LABEL[r.p.group])); }
+      var nm = platName(el('div', 'pvk-bar-name'), r.p);
       var track = el('div', 'pvk-track');
       track.setAttribute('role', 'img');
       track.setAttribute('aria-label', r.p.name + ': ' + fmt(r.total) + ' ročně');
@@ -352,7 +381,51 @@
       });
       mx.appendChild(tr);
     });
+    // odkaz na sekci skrytou filtrem platforem z navigace zmizí
+    Array.prototype.forEach.call(navLinks, function (a) {
+      var sec = a.target.closest('section');
+      a.link.hidden = !!(sec && sec.hidden);
+    });
     updateScrollers();
+  }
+
+  // Plovoucí navigace: zvýrazní sekci, ve které čtenář právě je.
+  var nav = $('nav');
+  var navLinks = Array.prototype.map.call(nav.querySelectorAll('a'), function (a) {
+    return { link: a, target: document.getElementById(a.getAttribute('href').slice(1)) };
+  }).filter(function (x) { return x.target; });
+  function updateNav() {
+    var edge = nav.getBoundingClientRect().bottom + 24, cur = null;
+    navLinks.forEach(function (x) {
+      if (!x.link.hidden && x.target.getBoundingClientRect().top <= edge) cur = x;
+    });
+    navLinks.forEach(function (x) {
+      if (x === cur) x.link.setAttribute('aria-current', 'true'); else x.link.removeAttribute('aria-current');
+    });
+    if (cur && nav.scrollWidth > nav.clientWidth) { // na mobilu posune aktivní odkaz do lišty
+      var l = cur.link.offsetLeft - nav.offsetLeft;
+      if (l < nav.scrollLeft || l + cur.link.offsetWidth > nav.scrollLeft + nav.clientWidth) nav.scrollLeft = l - 16;
+    }
+  }
+  var navTick = false;
+  window.addEventListener('scroll', function () {
+    if (navTick) return; navTick = true;
+    window.requestAnimationFrame(function () { navTick = false; updateNav(); });
+  }, { passive: true });
+
+  // Ukotvený první sloupec a lišta potřebují neprůhledné pozadí: převezmou
+  // ho z nejbližšího předka, který nějaké má (šablona webu), jinak bílá.
+  function syncBg() {
+    root.style.removeProperty('--pvk-bg');
+    for (var e = root.parentElement; e; e = e.parentElement) {
+      var b = getComputedStyle(e).backgroundColor;
+      if (b && b !== 'transparent' && !/rgba\([^)]*,\s*0\)$/.test(b)) { root.style.setProperty('--pvk-bg', b); return; }
+    }
+  }
+  syncBg();
+  if (window.matchMedia) { // přepnutí světlého a tmavého režimu
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', syncBg);
   }
 
   // Tabulky širší než stránka: třídy pvk-more-l / pvk-more-r zapnou
@@ -375,29 +448,12 @@
     render();
   });
   $('filter').hidden = false; // bez JavaScriptu filtr nefunguje, proto je skrytý
-
-  // Filtr zobrazení: skryje sekce s data-view. Třída místo atributu hidden,
-  // aby se nepletl s filtrem platforem, který sekce skrývá také.
-  var viewBoxes = root.querySelectorAll('.pvk-view');
-  function applyViews() {
-    var on = {};
-    Array.prototype.forEach.call(viewBoxes, function (i) { on[i.value] = i.checked; });
-    Array.prototype.forEach.call(root.querySelectorAll('section[data-view]'), function (s) {
-      s.classList.toggle('pvk-view-off', !on[s.getAttribute('data-view')]);
-    });
-    updateScrollers();
-  }
-  Array.prototype.forEach.call(viewBoxes, function (i) { i.addEventListener('change', applyViews); });
-  $('viewAll').addEventListener('click', function () {
-    Array.prototype.forEach.call(viewBoxes, function (i) { i.checked = true; });
-    applyViews();
-  });
-  $('views').hidden = false;
   root.addEventListener('change', function (e) { if (e.target.type === 'radio') render(); });
   $('markets').addEventListener('input', function (e) { S.n = parseInt(e.target.value, 10) || 1; render(); });
   Array.prototype.forEach.call(root.querySelectorAll('input'), function (i) {
-    if (i.id !== 'pvk-markets' && i.type !== 'radio' && !i.classList.contains('pvk-view')) i.addEventListener('input', render);
+    if (i.id !== 'pvk-markets' && i.type !== 'radio') i.addEventListener('input', render);
   });
   S.n = parseInt($('markets').value, 10) || 2;
   render();
+  updateNav();
 })();

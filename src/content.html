@@ -3,6 +3,15 @@
 <p>Nezávislé srovnání nákladů a funkcí e-shopových platforem pro obchodníky v Česku, na Slovensku a v EU. Kalkulačka počítá náklady pro jeden trh i pro expanzi na další trhy, platební brány zvlášť. Všechny platformy počítá stejnou metodikou a řadí je jen podle ceny. Ceny, které výrobce nezveřejňuje nebo které se nedají ověřit, jsou označené jako <span class="pvk-est">odhad</span>, minimální ceny jako <span class="pvk-est pvk-min">od</span>.</p>
 <p>Srovnávané platformy (abecedně): Magento (Open Source a Adobe Commerce), PrestaShop, Shopify (Basic až Plus), Shoptet (Basic až Premium), Shopware 6 a Upgates. Pro srovnání i startovací řešení Eshop-rychle, SimpleShop, Webnode a Wix.</p>
 
+<nav class="pvk-nav" id="pvk-nav" aria-label="Části srovnání">
+  <a href="#pvk-h-ctl">Nastavení</a>
+  <a href="#pvk-h-sum">Roční náklady</a>
+  <a href="#pvk-h-mx">Další trhy</a>
+  <a href="#pvk-h-pay">Platební brány</a>
+  <a href="#pvk-h-feat">Funkční srovnání</a>
+  <a href="#pvk-h-ass">Předpoklady a zdroje</a>
+</nav>
+
 <section aria-labelledby="pvk-h-ctl">
   <h2 id="pvk-h-ctl">Kalkulačka nákladů</h2>
   <noscript><p>Kalkulačka potřebuje JavaScript. Srovnání funkcí, platebních bran a ceníkové předpoklady níže jsou dostupné i bez něj.</p></noscript>
@@ -60,15 +69,6 @@
   </div>
 </section>
 
-<fieldset class="pvk-filter" id="pvk-views" hidden>
-  <legend>Zobrazit</legend>
-  <label><input type="checkbox" class="pvk-view" value="sum" checked> Roční náklady</label>
-  <label><input type="checkbox" class="pvk-view" value="mx" checked> Další trhy</label>
-  <label><input type="checkbox" class="pvk-view" value="pay" checked> Platební brány</label>
-  <label><input type="checkbox" class="pvk-view" value="feat" checked> Funkční srovnání</label>
-  <button type="button" id="pvk-viewAll" class="pvk-more">Zobrazit vše</button>
-</fieldset>
-
 <fieldset class="pvk-filter" id="pvk-filter" hidden>
   <legend>Platformy ve srovnání</legend>
   <label><input type="checkbox" class="pvk-plat" value="magento" checked> Magento / Adobe Commerce</label>
@@ -84,10 +84,15 @@
   <button type="button" id="pvk-platAll" class="pvk-more">Vybrat vše</button>
 </fieldset>
 
-<section aria-labelledby="pvk-h-sum" data-view="sum">
-  <h2 id="pvk-h-sum">Roční náklady na platformu</h2>
+<section aria-labelledby="pvk-h-sum">
+  <h3 id="pvk-h-sum">Roční náklady na platformu</h3>
   <p id="pvk-sumLede" aria-live="polite"></p>
   <p id="pvk-apiNote" hidden><small>Zobrazeny jen platformy s plnohodnotným API (produkty, sklady, objednávky, zákazníci) pro obousměrné napojení ERP a dalších systémů. Vyřazeny: Shoptet Basic až Enterprise (napojení jen přes doplňky, privátní API má až Premium), Eshop-rychle (API jen pro čtení objednávek), SimpleShop a Webnode.</small></p>
+  <div class="pvk-top" id="pvk-topWrap">
+    <p class="pvk-top-h">Nejnižší roční náklady při vašem zadání</p>
+    <ol class="pvk-top-list" id="pvk-top"></ol>
+  </div>
+  <div class="pvk-legend pvk-kinds"><span>Typ platformy:</span><span><i class="pvk-kind pvk-k-saas"></i>SaaS (hosting a upgrady řeší dodavatel)</span><span><i class="pvk-kind pvk-k-self"></i>Self-hosted / PaaS</span><span><i class="pvk-kind pvk-k-start"></i>Startovací řešení</span></div>
   <div class="pvk-legend">
     <span><i class="pvk-sw pvk-s-lic"></i>Licence / předplatné</span>
     <span><i class="pvk-sw pvk-s-mkt"></i>Dodatečně za další trhy</span>
@@ -117,9 +122,10 @@
   <p><small>Platební brána = poplatky za karetní platby u všech platforem stejnou metodikou: stejný podíl obratu přes bránu, stejná průměrná objednávka a stejný podíl karet mimo EHP. Nativní brány (Shopify Payments, Shoptet Pay) podle veřejného ceníku. Ostatní platformy, nebo při volbě externí brány, poplatek externí brány typu Comgate nebo GoPay (sazba v předpokladech, proto označená jako odhad) plus příplatek, který si za externí bránu účtuje platforma (Shopify 2 / 1 / 0,6 / 0,2 %, Shoptet doplněk 200 Kč/měs.). Nezahrnuje převody, dobírku, Klarnu, chargebacky ani měsíční paušály bran.</small></p>
 </section>
 
-<section aria-labelledby="pvk-h-mx" data-view="mx">
-  <h2 id="pvk-h-mx">Kolik stojí každý další trh</h2>
+<section aria-labelledby="pvk-h-mx">
+  <h3 id="pvk-h-mx">Kolik stojí každý další trh</h3>
   <p>Roční licence a dodatečné náklady za trhy (bez hostingu a plateb) při zvoleném obratu, režimu domén a bráně. Pod částkou je přírůstek oproti jednomu trhu.</p>
+  <div class="pvk-legend pvk-kinds"><span>Typ platformy:</span><span><i class="pvk-kind pvk-k-saas"></i>SaaS (hosting a upgrady řeší dodavatel)</span><span><i class="pvk-kind pvk-k-self"></i>Self-hosted / PaaS</span><span><i class="pvk-kind pvk-k-start"></i>Startovací řešení</span></div>
   <div class="pvk-scroll">
     <table>
       <thead><tr id="pvk-mxHead"></tr></thead>
@@ -128,7 +134,7 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-exp" data-view="mx">
+<section aria-labelledby="pvk-h-exp">
   <h2 id="pvk-h-exp">Jak platformy řeší expanzi do zahraničí</h2>
   <div class="pvk-cards">
     <div class="pvk-card" data-fam="shopify"><h3>Shopify Grow a Advanced</h3><span class="pvk-pill pvk-l3">Markets bez příplatku za trh</span><p>Shopify Markets: jeden obchod, trhy s vlastní doménou nebo podadresářem, měnou, jazykem a cenami. Aktivace trhu nic nestojí. Nižší tarify mají omezený počet marketů, ale jeden market může pokrýt více zemí (i s prodejem v lokální měně) a dají se použít submarkety. Platba v měně zákazníka jen se Shopify Payments. S externí bránou (Comgate, GoPay) se v checkoutu platí v základní měně obchodu.</p></div>
@@ -142,7 +148,7 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-pay" data-view="pay">
+<section aria-labelledby="pvk-h-pay">
   <h2 id="pvk-h-pay">Platební brány</h2>
   <p>Ceníkové sazby pro online karty, obchodník se sídlem v ČR. U velkých obratů jsou sazby externích bran i Shopify Payments (Plus) vyjednatelné.</p>
   <div class="pvk-scroll">
@@ -165,7 +171,7 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-feat" data-view="feat">
+<section aria-labelledby="pvk-h-feat">
   <h2 id="pvk-h-feat">Funkční srovnání platforem</h2>
   <p>Štítek ukazuje, jak dobře platforma danou oblast pokrývá pro středního až velkého obchodníka: <span class="pvk-pill pvk-l3">silné</span> <span class="pvk-pill pvk-l2">s omezením</span> <span class="pvk-pill pvk-l1">slabé</span></p>
   <div class="pvk-scroll">
@@ -191,7 +197,7 @@
   </div>
 </section>
 
-<section aria-labelledby="pvk-h-start" data-view="feat">
+<section aria-labelledby="pvk-h-start">
   <h2 id="pvk-h-start">Startovací řešení: kdy dávají smysl a kde končí</h2>
   <p>Eshop-rychle, SimpleShop, Webnode a Wix jsou levné a rychlé na spuštění. S rostoucím obratem ale narážejí na limity v katalogu, integracích, expanzi a škálování. Kalkulačka je počítá stejně jako ostatní, aby bylo vidět, kde se vyplatí a kde už ne.</p>
   <div class="pvk-scroll">

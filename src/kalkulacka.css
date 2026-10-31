@@ -2,6 +2,8 @@
    Vše je omezené na .pv-kalk; písmo a barvy textu se dědí ze stránky.
    Barvy grafu lze přepsat proměnnými --pvk-*. */
 .pv-kalk {
+  --pvk-bg: #fff;          /* skript převezme pozadí stránky */
+  --pvk-nav-top: 0px;      /* odsazení plovoucí navigace, např. pod fixní hlavičkou šablony */
   --pvk-line: color-mix(in srgb, currentColor 18%, transparent);
   --pvk-fill: color-mix(in srgb, currentColor 7%, transparent);
   --pvk-lic: #2f5d8a;
@@ -12,8 +14,26 @@
   --pvk-good: #1f7a4d;
   --pvk-warn: #a36a00;
   --pvk-bad: #b23a2e;
+  --pvk-k-saas: #129a8c;   /* tyrkysová */
+  --pvk-k-self: #c2185b;   /* purpurová */
+  --pvk-k-start: #e6a800;  /* žlutá */
 }
 .pv-kalk [hidden] { display: none !important; }
+.pv-kalk .pvk-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* plovoucí navigace */
+.pv-kalk .pvk-nav {
+  position: sticky; top: var(--pvk-nav-top); z-index: 5;
+  display: flex; gap: .25em 1.25em; overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+  margin: 1em 0; padding: .6em 0; background: var(--pvk-bg); border-bottom: 1px solid var(--pvk-line);
+}
+.pv-kalk .pvk-nav::-webkit-scrollbar { display: none; }
+.pv-kalk .pvk-nav a { text-decoration: none; padding: .15em 0; border-bottom: 2px solid transparent; }
+.pv-kalk .pvk-nav a[aria-current] { font-weight: 700; border-bottom-color: currentColor; }
+.pv-kalk h2, .pv-kalk h3 { scroll-margin-top: calc(var(--pvk-nav-top) + 4em); }
+.admin-bar .pv-kalk { --pvk-nav-top: 32px; }
+@media (max-width: 782px) { .admin-bar .pv-kalk { --pvk-nav-top: 46px; } }
+@media (max-width: 600px) { .admin-bar .pv-kalk { --pvk-nav-top: 0px; } }
 
 /* ovládání */
 .pv-kalk .pvk-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25em 2em; }
@@ -29,11 +49,37 @@
 .pv-kalk .pvk-filter legend { padding: 0; margin-bottom: .5em; font-weight: 700; }
 .pv-kalk .pvk-filter label { display: inline-flex; gap: .4em; align-items: baseline; cursor: pointer; white-space: nowrap; }
 .pv-kalk .pvk-filter input { margin: 0; }
-.pv-kalk .pvk-filter + .pvk-filter { margin-top: 1em; }
-.pv-kalk .pvk-view-off { display: none !important; }
 .pv-kalk fieldset.pvk-ctl.pvk-row { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: .5em 1.25em; }
 .pv-kalk .pvk-advgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75em 1.5em; margin-top: .75em; }
 .pv-kalk .pvk-advgrid label { display: flex; flex-direction: column; gap: .25em; }
+
+/* souhrn: 3 nejlevnější */
+.pv-kalk .pvk-top-h { margin: 1em 0 .5em; font-weight: 700; }
+.pv-kalk .pvk-top-list { list-style: none; margin: 0 0 1em; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75em; }
+.pv-kalk .pvk-top-card { margin: 0; padding: .75em 1em; border: 1px solid var(--pvk-line); border-left-width: 4px; }
+.pv-kalk .pvk-top-name { border: 0; padding: 0; font-weight: 700; }
+.pv-kalk .pvk-top-val { font-size: 1.25em; font-weight: 700; font-variant-numeric: tabular-nums; margin: .2em 0; }
+@media (max-width: 640px) { /* na mobilu kompaktní řádky: název vlevo, částka vpravo */
+  .pv-kalk .pvk-top-list { gap: .4em; }
+  .pv-kalk .pvk-top-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 .75em; padding: .5em .75em; }
+  .pv-kalk .pvk-top-val { font-size: 1em; margin: 0; text-align: right; }
+  .pv-kalk .pvk-top-card .pvk-note { grid-column: 1 / -1; }
+}
+
+/* typ platformy: proužek u názvu */
+.pv-kalk .pvk-k-saas, .pv-kalk .pvk-k-self, .pv-kalk .pvk-k-start { border-left: 4px solid; padding-left: .5em; }
+.pv-kalk .pvk-k-saas { border-left-color: var(--pvk-k-saas); }
+.pv-kalk .pvk-k-self { border-left-color: var(--pvk-k-self); }
+.pv-kalk .pvk-k-start { border-left-color: var(--pvk-k-start); }
+.pv-kalk .pvk-kind { display: inline-block; width: 4px; height: 1em; margin-right: .4em; vertical-align: -.15em; }
+.pv-kalk .pvk-kind.pvk-k-saas { background: var(--pvk-k-saas); }
+.pv-kalk .pvk-kind.pvk-k-self { background: var(--pvk-k-self); }
+.pv-kalk .pvk-kind.pvk-k-start { background: var(--pvk-k-start); }
+.pv-kalk .pvk-kind { border: 0; padding: 0; }
+.pv-kalk .pvk-kinds { margin: .75em 0; }
+.pv-kalk th[data-fam=shopify], .pv-kalk th[data-fam=shoptet], .pv-kalk th[data-fam=upgates] { border-top: 4px solid var(--pvk-k-saas); }
+.pv-kalk th[data-fam=shopware], .pv-kalk th[data-fam=magento], .pv-kalk th[data-fam=presta] { border-top: 4px solid var(--pvk-k-self); }
+.pv-kalk th[data-fam=erychle], .pv-kalk th[data-fam=simpleshop], .pv-kalk th[data-fam=webnode], .pv-kalk th[data-fam=wix] { border-top: 4px solid var(--pvk-k-start); }
 
 /* graf */
 .pv-kalk .pvk-legend { display: flex; flex-wrap: wrap; gap: .5em 1.25em; font-size: .875em; }
@@ -55,21 +101,17 @@
 
 /* tabulky */
 .pv-kalk .pvk-scroll { overflow-x: auto; max-width: 100%; --pvk-fade: 4em; }
-/* zesvětlený okraj = tabulka pokračuje, dá se posunout do strany */
+/* zesvětlený pravý okraj = tabulka pokračuje, dá se posunout do strany;
+   vlevo místo toho stín u ukotveného prvního sloupce */
 .pv-kalk .pvk-scroll.pvk-more-r {
   -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--pvk-fade)), transparent);
           mask-image: linear-gradient(to right, #000 calc(100% - var(--pvk-fade)), transparent);
 }
-.pv-kalk .pvk-scroll.pvk-more-l {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade));
-          mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade));
-}
-.pv-kalk .pvk-scroll.pvk-more-l.pvk-more-r {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade), #000 calc(100% - var(--pvk-fade)), transparent);
-          mask-image: linear-gradient(to right, transparent, #000 var(--pvk-fade), #000 calc(100% - var(--pvk-fade)), transparent);
-}
+.pv-kalk .pvk-scroll tr > :first-child { position: sticky; left: 0; z-index: 1; background: var(--pvk-bg); }
+.pv-kalk .pvk-scroll.pvk-more-l tr > :first-child { box-shadow: 8px 0 8px -8px color-mix(in srgb, currentColor 45%, transparent); }
 .pv-kalk .pvk-more { cursor: pointer; }
-.pv-kalk table { border-collapse: collapse; width: 100%; }
+/* separate místo collapse: u collapse by ukotvené buňky ztrácely okraje */
+.pv-kalk table { border-collapse: separate; border-spacing: 0; width: 100%; }
 .pv-kalk th, .pv-kalk td { padding: .5em .6em; border-bottom: 1px solid var(--pvk-line); text-align: left; vertical-align: top; }
 .pv-kalk .pvk-r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .pv-kalk .pvk-tot { font-weight: 700; }
@@ -77,7 +119,12 @@
 .pv-kalk .pvk-hl { background: var(--pvk-fill); }
 .pv-kalk .pvk-name { min-width: 12em; }
 .pv-kalk .pvk-note { display: block; font-size: .85em; opacity: .75; white-space: normal; }
+.pv-kalk .pvk-notes summary { cursor: pointer; font-size: .85em; opacity: .75; }
 .pv-kalk .pvk-feat td { min-width: 9em; }
+@media (max-width: 640px) {
+  .pv-kalk .pvk-name { min-width: 8em; }
+  .pv-kalk .pvk-scroll tr > :first-child { max-width: 40vw; }
+}
 
 /* štítky */
 .pv-kalk .pvk-est, .pv-kalk .pvk-tag, .pv-kalk .pvk-pill {
