@@ -146,3 +146,8 @@
 .pv-kalk .pvk-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1em; }
 .pv-kalk .pvk-card { min-width: 0; padding: 1em; border: 1px solid var(--pvk-line); }
 .pv-kalk .pvk-card h3 { margin-top: 0; }
+
+/* slovníček pojmů (AI kapitola) */
+.pv-kalk .pvk-gloss { font-size: .9em; }
+.pv-kalk .pvk-gloss dt { font-weight: 700; }
+.pv-kalk .pvk-gloss dd { margin: 0 0 .6em; }

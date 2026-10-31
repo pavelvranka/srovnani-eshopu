@@ -27,11 +27,14 @@ Barvy grafu a štítků lze přepsat v CSS šablony, např.:
 
 == Changelog ==
 
-= 1.2.0 =
-* Plovoucí navigace po sekcích (náklady, trhy, platební brány, funkční srovnání).
+= 1.3.0 =
+* Nová kapitola „AI a nákup přes AI agenty“: AI pomocníci v administraci, napojení přes MCP, agentní nakupování.
+* Plovoucí navigace po sekcích (náklady, trhy, platební brány, funkční srovnání, AI).
 * Souhrn 3 nejlevnějších variant, barevné rozlišení SaaS / self-hosted / startovací řešení.
 * Záhlaví tabulek zůstává při rolování vidět pod navigací.
 * Ukotvený první sloupec v širokých tabulkách, poznámky v rozpisu nákladů sbalené pod „více“.
+
+= 1.2.0 =
 * Filtr platforem nad výsledky, platí pro náklady, trhy, expanzi, platební brány i funkční srovnání.
 * Přepínače trhů a platební brány jako radio buttony.
 * Rozpis nákladů ukazuje prvních 5 platforem, zbytek po kliknutí na „Zobrazit vše“.
